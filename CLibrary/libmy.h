@@ -2,6 +2,7 @@
     #define MYLIB
 
     #include <stdlib.h>
+    #include <stdio.h>
 
     #define MAX(a, b) (a > b ? a : b)
     #define DEFINE_TRIVIAL_CLEANUP_FUNC(type, func)             \
@@ -9,7 +10,6 @@
                 if (*p)                                         \
                         func(*p);                               \
         }                                                       \
-        struct __useless_struct_to_allow_trailing_semicolon__
 
     #include "MyHash.h"
     #include "my_radix.h"

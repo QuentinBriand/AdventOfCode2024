@@ -26,7 +26,7 @@ int main(int ac, char **av) {
     int leftMaxValue = 0;
     int rightMaxValue = 0;
 
-    HashMap *m = createHashmap(nbLine, 0.80, counter);
+    smartHashMap m = createHashmap(nbLine, 0.80, counter);
     
     while ((nread = getline(&line, &len, file)) != -1) {
         leftCol[cLine] = atoi(line);
@@ -44,6 +44,7 @@ int main(int ac, char **av) {
         rightMaxValue = MAX(rightMaxValue, rightCol[cLine]);
         cLine++;
     }
+    fclose(file);
 
     radix(leftCol, nbLine, leftMaxValue);
     radix(rightCol, nbLine, rightMaxValue);
@@ -66,4 +67,5 @@ int main(int ac, char **av) {
 
     free(leftCol);
     free(rightCol);
+    free(line);
 }

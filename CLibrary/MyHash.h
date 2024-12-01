@@ -15,6 +15,9 @@
         int (*valueUpdater)(int oldKey, int newKey);
     } HashMap;
 
+    void freeHashmap(HashMap **m);
+    #define smartHashMap __attribute__((cleanup(freeHashmap))) HashMap*
+
     void resizeHashMap(HashMap *m);
     int hash(int key, int capacity);
     void insertHashmap(HashMap *m, int key, int value);

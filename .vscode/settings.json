@@ -3,6 +3,7 @@
         "stdio.h": "c",
         "stdlib.h": "c",
         "libmy.h": "c",
-        "my_radix.h": "c"
+        "my_radix.h": "c",
+        "myhash.h": "c"
     }
 }

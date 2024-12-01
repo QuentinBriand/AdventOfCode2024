@@ -1,10 +1,12 @@
 
 #include "libmy.h"
 
-void freeHashmap(HashMap *m) {
-    free(m->entries);
+void freeHashmap(HashMap **m) {
+    if (*m) {
+        free((*m)->entries);
+        free(*m);
+    }
 }
-DEFINE_TRIVIAL_CLEANUP_FUNC(HashMap *, freeHashmap);
 
 HashMap *createHashmap(const int initialCapacity, const float maximumLoad, const int(*valueUpdater)(int oldKey, int newKey)) {
     HashMap *m = malloc(sizeof(HashMap));
