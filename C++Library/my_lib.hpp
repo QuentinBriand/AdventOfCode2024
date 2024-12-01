@@ -1,8 +1,12 @@
 /**
- * SIT PROJECT, 2024
- * my_lib.hpp
- * File description:
- * my_lib.hpp
+ * Copyright (c) 2024 - Kleo
+ * Authors:
+ * - Antoine FRANKEL <antoine.frankel@epitech.eu>
+ * NOTICE: All information contained herein is, and remains
+ * the property of Kleo © and its suppliers, if any.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Kleo ©.
  */
 
 #ifndef MY_LIB_HPP
@@ -16,17 +20,42 @@
 #include <string>
 #include <vector>
 
+#define RESOURCES_PATH "resources/"
+
 #ifdef ANTOINE
+#define NAME "Antoine"
 #define COOKIE "53616c7465645f5f9ebf055dfdb60c82e03c13a4577d7c31f316a73950a740b4846c37845ea6cfa74fa8714910dad48b29bec156a93fc6bdfe937cf1c3bb5479"
 #endif
+
+std::vector<std::string> read_file(const std::string &filename) {
+    std::vector<std::string> lines;
+    std::string line;
+
+    std::ifstream file(filename);
+    while (std::getline(file, line)) {
+        lines.push_back(line);
+    }
+    return lines;
+}
 
 std::vector<std::string> get_input() {
 #ifndef COOKIE
 #define COOKIE ""
-    std::cerr << "Please provide your session cookie in the COOKIE variable." << std::endl;
+#define NAME ""
+    std::cerr << "Please provide your session cookie in the COOKIE variable and your name in the NAME variable." << std::endl;
     exit(84);
 #endif
-    std::string url = "https://adventofcode.com/2024/day/" + std::to_string(std::time(nullptr) / 86400 % 31) + "/input";
+    int today = std::time(nullptr) / 86400 % 31;
+
+    std::ostringstream foldername;
+    foldername << "Day" << std::setw(2) << std::setfill('0') << today;
+    std::string filename = RESOURCES_PATH + foldername.str() + "/" + NAME + ".txt";
+    if (std::filesystem::exists(filename)) {
+		std::cout << "Reading from file " << filename << std::endl;
+        return read_file(filename);
+    }
+
+    std::string url = "https://adventofcode.com/2024/day/" + std::to_string(today) + "/input";
     std::string command = "curl -s " + url + " -H \"Cookie: session=" + COOKIE + "\"";
     std::vector<std::string> result;
     char buffer[128];
@@ -46,18 +75,13 @@ std::vector<std::string> get_input() {
         std::cerr << "Please provide your session cookie in the COOKIE variable." << std::endl;
         exit(84);
     }
-    return result;
-}
 
-std::vector<std::string> read_file(const std::string &filename) {
-    std::vector<std::string> lines;
-    std::string line;
-
-    std::ifstream file(filename);
-    while (std::getline(file, line)) {
-        lines.push_back(line);
+    std::ofstream file(filename);
+    for (auto &line : result) {
+        file << line;
     }
-    return lines;
+    file.close();
+    return result;
 }
 
 std::vector<std::string> split(std::string s, const std::string &delimiter) {

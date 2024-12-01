@@ -1,11 +1,15 @@
 /**
- * SIT PROJECT, 2024
- * main.cpp
- * File description:
- * main.cpp
+ * Copyright (c) 2024 - Kleo
+ * Authors:
+ * - Antoine FRANKEL <antoine.frankel@epitech.eu>
+ * NOTICE: All information contained herein is, and remains
+ * the property of Kleo © and its suppliers, if any.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Kleo ©.
  */
 
-// #define ANTOINE
+#define ANTOINE
 
 #include "limits.h"
 #include "my_lib.hpp"
@@ -13,7 +17,6 @@
 int main() {
     std::vector<int> l1, l2;
     std::vector<std::string> input = get_input();
-	std::cout << input[0] << std::endl;
     int max = 0;
     for (auto &line : input) {
         std::vector<std::string> tokens = split(line, "   ");
