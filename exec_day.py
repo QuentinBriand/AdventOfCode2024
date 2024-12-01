@@ -15,7 +15,7 @@ import sys
 import os
 import argparse
 
-languages = ["C", "C++", "Python"]
+languages = ["C", "C++", "Python", "Rust"]
 
 def compile_and_run(day_nb, language, name):
 	directory = f"Day{day_nb:02d}/{language}/{name}"
@@ -24,11 +24,14 @@ def compile_and_run(day_nb, language, name):
 		return
 
 	if language == "C":
-		os.system(f"gcc {directory}/*.c -I ./CLibrary -o {directory}/program && {directory}/program")
+		os.system(f"gcc {directory}/*.c -I ./CLibrary -lm -lmy -L./CLibrary -o {directory}/program && {directory}/program")
 	elif language == "C++":
 		os.system(f"g++ {directory}/*.cpp -I ./C++Library -o {directory}/program && {directory}/program")
 	elif language == "Python":
 		os.system(f"python3 {directory}/*.py")
+	elif language == "Rust":
+		os.system(f"rustc {directory}/*.rs && ./main")
+
 	else:
 		print(f"Error: Unsupported language {language}")
 

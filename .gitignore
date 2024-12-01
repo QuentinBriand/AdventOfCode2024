@@ -6,3 +6,5 @@ resources/Day*/second*
 __pycache__
 *.o
 *.a
+main
+program

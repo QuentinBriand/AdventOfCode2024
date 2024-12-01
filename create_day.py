@@ -11,7 +11,7 @@
 #
 import os
 import sys
-languages = ["C", "C++", "Python"]
+languages = ["C", "C++", "Python", "Rust"]
 
 def create_day_folder(day_number, person):
 	day_folder = f"Day{day_number:02d}"
