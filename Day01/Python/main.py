@@ -1,3 +1,5 @@
+from collections import Counter
+
 if __name__ == '__main__':
     filename = f'./resources/Day01/longInput'
     with open(filename, 'r') as f:
@@ -13,4 +15,11 @@ if __name__ == '__main__':
     for i in range(len(left_set)):
         total_dst_sum += abs(left_set[i] - right_set[i])
 
-    print("Total distance sum: ", total_dst_sum)
+    c = Counter(lines[1])
+    similarityScore = 0
+    for i in lines[0]:
+        if i in c:
+            similarityScore += c[i] * i
+
+    print("Total Distance: ", total_dst_sum)
+    print("Similarity Score: ", similarityScore)
