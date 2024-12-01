@@ -4,3 +4,5 @@ resources/Day*/second*
 **/*.js
 **/*out
 __pycache__
+*.o
+*.a
