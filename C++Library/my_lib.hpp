@@ -84,6 +84,22 @@ std::vector<std::string> get_input() {
     return result;
 }
 
+template <typename T>
+std::vector<T> split(std::string s, const std::string &delimiter) {
+	std::vector<T> tokens;
+	size_t pos = 0;
+	std::string token;
+	while ((pos = s.find(delimiter)) != std::string::npos) {
+		token = s.substr(0, pos);
+		tokens.push_back(token);
+		s.erase(0, pos + delimiter.length());
+	}
+	tokens.push_back(s);
+
+	return tokens;
+}
+
+template <>
 std::vector<std::string> split(std::string s, const std::string &delimiter) {
     std::vector<std::string> tokens;
     size_t pos = 0;
@@ -94,6 +110,21 @@ std::vector<std::string> split(std::string s, const std::string &delimiter) {
         s.erase(0, pos + delimiter.length());
     }
     tokens.push_back(s);
+
+    return tokens;
+}
+
+template <>
+std::vector<int> split(std::string s, const std::string &delimiter) {
+    std::vector<int> tokens;
+    size_t pos = 0;
+    std::string token;
+    while ((pos = s.find(delimiter)) != std::string::npos) {
+        token = s.substr(0, pos);
+        tokens.push_back(std::atoi(token.c_str()));
+        s.erase(0, pos + delimiter.length());
+    }
+    tokens.push_back(std::atoi(s.c_str()));
 
     return tokens;
 }
