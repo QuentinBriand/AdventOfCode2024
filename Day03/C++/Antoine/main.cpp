@@ -23,8 +23,6 @@ int main(void) {
     std::regex dontPattern(R"(don't())");
 
     for (auto &line : input) {
-        std::vector<std::string> validInstructions;
-
         auto current = line.begin();
         while (current != line.end()) {
             std::smatch match;
