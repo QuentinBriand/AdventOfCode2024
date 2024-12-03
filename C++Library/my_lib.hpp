@@ -20,7 +20,7 @@
 #include <string>
 #include <vector>
 
-#define RESOURCES_PATH "resources/"
+#define RESOURCES_PATH "./resources/"
 
 #ifdef ANTOINE
 #define NAME "Antoine"
@@ -55,10 +55,12 @@ std::vector<std::string> get_input() {
         return read_file(filename);
     }
 
+	std::filesystem::create_directories(RESOURCES_PATH + foldername.str());
+
     std::string url = "https://adventofcode.com/2024/day/" + std::to_string(today) + "/input";
     std::string command = "curl -s " + url + " -H \"Cookie: session=" + COOKIE + "\"";
     std::vector<std::string> result;
-    char buffer[128];
+    char buffer[65536];
     FILE *pipe = popen(command.c_str(), "r");
     if (!pipe) throw std::runtime_error("popen() failed!");
     try {
